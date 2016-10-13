@@ -1,6 +1,6 @@
 'use strict';
 
-import {parse} from 'url'
+const {parse} = require('url');
 
 export default (options = {}) => {
   const logger = getLogger(options)
