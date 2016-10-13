@@ -44,37 +44,21 @@ whenever there is a request which fulfills the following criteria:
     `.` (DOT) character and
  4. does not match a pattern provided in options.rewrites (see options below)
 
-## Usage
+Usage
 
-The middleware is available through NPM and can easily be added.
-
+The install.
 ```
-npm install --save connect-history-api-fallback
+npm install --save @zhuowenli/koa-history-api-fallback
 ```
 
 Import the library
 
-```javascript
-var history = require('connect-history-api-fallback');
 ```
+const historyApiFallback = require('koa-history-api-fallback');
 
-Now you only need to add the middleware to your application like so
+const app = new Koa();
 
-```javascript
-var connect = require('connect');
-
-var app = connect()
-  .use(history())
-  .listen(3000);
-```
-
-Of course you can also use this piece of middleware with express:
-
-```javascript
-var express = require('express');
-
-var app = express();
-app.use(history());
+app.use(historyApiFallback());
 ```
 
 ## Options
