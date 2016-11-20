@@ -5,10 +5,10 @@ const {parse} = require('url');
 module.exports = (options = {}) => {
   const logger = getLogger(options)
 
-  return function * (ctx, next) {
-    const headers = ctx.req.headers
-    const url = ctx.req.url
-    const method = ctx.req.method
+  return function * (next) {
+    const headers = this.req.headers
+    const url = this.req.url
+    const method = this.req.method
     const skip = `Not rewriting ${method} ${url}`
 
     if (method !== 'GET') {
@@ -40,7 +40,7 @@ module.exports = (options = {}) => {
       if (match !== null) {
         rewriteTarget = evaluateRewriteRule(parsedUrl, match, rewrite.to)
         logger(`Rewriting ${method} ${url} to ${rewriteTarget}`)
-        ctx.req.url = rewriteTarget
+        this.req.url = rewriteTarget
         yield * next
       }
     }
@@ -53,7 +53,7 @@ module.exports = (options = {}) => {
 
     rewriteTarget = options.index || '/index.html'
     logger(`Rewriting ${method} ${url} to ${rewriteTarget}`)
-    ctx.req.url = rewriteTarget
+    this.req.url = rewriteTarget
 
     yield * next
   };
